@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const InvalidApiKeyException = (message) => {
+function InvalidApiKeyException (message) {
     this.message = message;
 }
 
@@ -27,7 +27,7 @@ class ChatGPTApi {
         if(apiKey) {
             this.apiKey = apiKey;
         } else {
-            throw new InvalidApiKeyException(`Invalid ChatGPT Api Token Exception`)
+            throw new InvalidApiKeyException(`Missing a ChatGPT Api key`)
         }
     }
 
