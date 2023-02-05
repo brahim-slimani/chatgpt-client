@@ -1,5 +1,12 @@
 const axios = require("axios");
 
+const InvalidApiKeyException = (message) => {
+    this.message = message;
+}
+
+InvalidApiKeyException.prototype = new Error();
+InvalidApiKeyException.prototype.name = "InvalidApiKeyException";
+
 /**
  * Open AI call interceptor
  */
@@ -13,17 +20,29 @@ customInterceptor.interceptors.request.use(
     error => Promise.reject(error)
 );
 
-const chatGPTrequest = ({token, model, prompt}) => {
-    return customInterceptor.request({
-        method: "POST",
-        headers: { 'Authorization': `Bearer ${token}` },
-        data: {
-            model: model, 
-            prompt: prompt
+class ChatGPTApi {
+
+    apiKey;
+    constructor({ apiKey }) {
+        if(apiKey) {
+            this.apiKey = apiKey;
+        } else {
+            throw new InvalidApiKeyException(`Invalid ChatGPT Api Token Exception`)
         }
-    });
+    }
+
+    chatGPTrequest = ({ model, prompt }) => {
+        return customInterceptor.request({
+            method: "POST",
+            headers: { 'Authorization': `Bearer ${this.apiKey}` },
+            data: {
+                model: model,
+                prompt: prompt
+            }
+        });
+    }
 }
 
 module.exports = {
-    chatGPTrequest
+    ChatGPTApi
 }
