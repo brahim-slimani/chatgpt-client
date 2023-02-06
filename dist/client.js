@@ -35,14 +35,17 @@ class ChatGPTApi {
         );
     }
 
-    chatGPTrequest = ({ model, prompt }) => {
+    sendMessage = ({ model, prompt, max_tokens, temperature, nCompeletions }) => {
         return customInterceptor.request({
             url: "/completions",
             method: "POST",
             headers: { 'Authorization': `Bearer ${this.apiKey}` },
             data: {
-                model: model,
-                prompt: prompt
+                model: model ? model : "text-davinci-003",
+                prompt: prompt, 
+                ...(max_tokens) && {'max_tokens': max_tokens},
+                ...(temperature) && {'temperature': temperature},
+                ...(nCompeletions) && {'n': nCompeletions}
             }
         });
     }
