@@ -1,5 +1,5 @@
 {
-  "name": "chatgpt-client",
+  "name": "chatgpt-api-client",
   "version": "1.0.0",
   "description": "JS client for OpenAI chatGPT API",
   "main": "index.js",
