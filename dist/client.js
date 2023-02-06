@@ -27,7 +27,7 @@ class ChatGPTApi {
         if(apiKey) {
             this.apiKey = apiKey;
         } else {
-            throw new InvalidApiKeyException(`Missing a ChatGPT Api key`)
+            throw new InvalidApiKeyException(`Missing OpenAI Api key`)
         }
     }
 
