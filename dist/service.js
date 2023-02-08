@@ -1,6 +1,5 @@
 class ReqService {
 
-    interceptorInstance
     constructor(instance) {
         this.interceptorInstance = instance;
     }
@@ -18,7 +17,7 @@ class ReqService {
         this.interceptorInstance.request({ url, method, data, params, headers }).then(response => {
             resolve(response.data);
         }, error => {
-            console.error(message?.error || error);
+            console.error(error?.message || error);
             reject(error?.response?.data || error?.message || 'Unexpected error has occured');
         });
     });

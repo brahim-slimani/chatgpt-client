@@ -15,8 +15,6 @@ const customInterceptor = axios.create();
 
 class ChatGPTApi {
 
-    apiKey; organization;
-
     /**
      * ChatGPTApi constructor
      * @param {Object}, 
