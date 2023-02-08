@@ -1,6 +1,7 @@
 const axios = require("axios");
+const { ReqService } = require("./service");
 
-function InvalidApiKeyException (message) {
+function InvalidApiKeyException(message) {
     this.message = message;
 }
 
@@ -18,7 +19,7 @@ class ChatGPTApi {
     organization;
     constructor({ apiKey, organization }) {
         this.organization = organization;
-        if(apiKey) {
+        if (apiKey) {
             this.apiKey = apiKey;
         } else {
             throw new InvalidApiKeyException(`Missing OpenAI Api key`)
@@ -28,30 +29,31 @@ class ChatGPTApi {
             async (config) => {
                 config.baseURL = "https://api.openai.com/v1";
                 config.timeout = 30 * 1000; //in seconds,
-                config.headers = { 'Authorization': `Bearer ${this.apiKey}`, ...(this.organization) && {'OpenAI-Organization': `${this.organization}`} }
+                config.headers = { 'Authorization': `Bearer ${this.apiKey}`, ...(this.organization) && { 'OpenAI-Organization': `${this.organization}` } }
                 return config;
             },
             error => Promise.reject(error)
         );
     }
 
-    sendMessage = ({ model, prompt, max_tokens, temperature, nCompeletions }) => {
-        return customInterceptor.request({
+    service = new ReqService(customInterceptor);
+
+    sendMessage = ({ model, prompt, max_tokens, temperature, nCompeletions }) => new Promise((resolve, reject) => {
+        return this.service.call({
             url: "/completions",
             method: "POST",
-            headers: { 'Authorization': `Bearer ${this.apiKey}` },
             data: {
                 model: model ? model : "text-davinci-003",
-                prompt: prompt, 
-                ...(max_tokens) && {'max_tokens': max_tokens},
-                ...(temperature) && {'temperature': temperature},
-                ...(nCompeletions) && {'n': nCompeletions}
+                prompt: prompt,
+                ...(max_tokens) && { 'max_tokens': max_tokens },
+                ...(temperature) && { 'temperature': temperature },
+                ...(nCompeletions) && { 'n': nCompeletions }
             }
         });
-    }
+    });
 
     getModels = () => {
-        return customInterceptor.request({
+        return this.service.call({
             url: "/models",
             method: "GET",
         });
