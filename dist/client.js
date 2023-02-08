@@ -8,6 +8,11 @@ function InvalidApiKeyException(message) {
 InvalidApiKeyException.prototype = new Error();
 InvalidApiKeyException.prototype.name = "InvalidApiKeyException";
 
+/**
+ * Open AI call interceptor
+ */
+const customInterceptor = axios.create();
+
 class ChatGPTApi {
 
     apiKey; organization;
