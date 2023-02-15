@@ -1,0 +1,1 @@
+const { ChatGPTApi } = require('./index');
