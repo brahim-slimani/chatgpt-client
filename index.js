@@ -1,6 +1,8 @@
 
-require('dotenv').config();
-const { ChatGPTApi } = require("./dist/client");
+module.exports = require("./dist/client");
+
+//require('dotenv').config();
+//const { ChatGPTApi } = require("./dist/client");
 
 //const api = new ChatGPTApi({ apiKey: process.env.API_KEY });
 
