@@ -43,7 +43,7 @@ class ChatGPTApi {
     service = new ReqService(customInterceptor);
 
     /**
-     * Given a prompt, the model will return one or more predicted respones, 
+     * Given a prompt, the model will return one or more suggered responses, 
      * and can also return the probabilities of alternative tokens at each position.
      * @param {Object}  
      * model: ID of the model to use. You can use the List models API (api.getModels) to see all of your available models, Default is `text-davinci-003`
@@ -68,7 +68,7 @@ class ChatGPTApi {
     };
 
     /**
-     * This allows to retrieve a lists the currently available OpenAI models, and provides basic information about each one such as the owner and availability.
+     * This allows to retrieve a list of the currently available OpenAI models, and provides basic information about each one such as the owner and availability.
      * @returns Promise object
      */
     getModels = () => {
