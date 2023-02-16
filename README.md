@@ -77,6 +77,8 @@ const { ChatGPTApi } = require("chatgpt-api-client");
 ## Github repository
 If you have any contribution request, feature or if you found a bug or any issue please report them to this [github repository](https://github.com/brahim-slimani/chatgpt-client)
 
+## License
+ISC © https://opensource.org/
 
 ## Author
 [Brahim Slimani](https://brahim-slimani.github.io/profile)
