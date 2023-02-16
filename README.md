@@ -36,13 +36,13 @@ const response = await api.sendMessage({ prompt: "Hi! How is the weather today?"
 **text-davinci-003** is the default model that is specified in case of non-mentioned model property.<br>
 
 
-There are a bit of parameters to pass in the sendMessage function namely the max of tokens, temperature and number of compeletions.
+There are a bit of parameters to pass in the sendMessage function namely the max of tokens, temperature and number of completions.
 ```javascript
 const response = await api.sendMessage({ 
         prompt: "Hi! How is the weather today?", //The prompt(s) to generate completions for
         model: "model-id-0", //ID of the model to use
         max_tokens: 500, //The maximum number of tokens to generate in the completion
-        temperature: 1.5, //What sampling temperature to use, between 0 and 2, Default is 1
+        temperature: 0, //What sampling temperature to use, between 0 and 2, Default is 1
         nCompeletions: 3 //How many completions to generate for each prompt. Default is 1
     });
 ```
@@ -54,3 +54,29 @@ const api = new ChatGPTApi({ apiKey: process.env.OPENAI_API_KEY });
 //Retrieve the list of available OpenAI models
 let models = await api.getModels();
 ```
+<br>
+
+## Usage with Promise return
+The previous examples were made with Async/Await calls through asynchronos promise. We could explicitly handle the return of Promise Object.
+
+```javascript
+api.sendMessage({ prompt: "Hello! this is a test" }).then((response) => {
+    //Proceed with success
+    console.info("Response data", response);
+}, error => {
+    //An error has occured
+    console.error("Error", error);
+});
+```
+
+## For Common.JS usage
+```javascript
+const { ChatGPTApi } = require("chatgpt-api-client");
+```
+
+## Github repository
+If you have any contribution request, feature or if you found a bug or any issue please report them to this [github repository](https://github.com/brahim-slimani/chatgpt-client)
+
+
+## Author
+[Brahim Slimani](https://brahim-slimani.github.io/profile)
