@@ -16,11 +16,20 @@ import { ChatGPTApi } from "chatgpt-api-client";
 async function try() {
 
     const api = new ChatGPTApi({ apiKey: process.env.OPENAI_API_KEY });
-    const response = await api.sendMessage({ prompt: "Hello! How is the weather today?" });
+    const response = await api.sendMessage({ prompt: "Hi! How is the weather today?" });
 
     console.info(response);
 }
+```
+For users who belong to multiple organizations, you can pass a this property to specify which organization is used for an API request.
 
+```javascript
+const api = new ChatGPTApi({ apiKey: process.env.OPENAI_API_KEY, organization: "custom-org" });
 ```
 
+You can specify which AI model will be used in the processing of your requests.
 
+```javascript
+const response = await api.sendMessage({ prompt: "Hi! How is the weather today?", model: "model-id-0" });
+```
+**text-davinci-003** is the default model that is specified in case of non-mentioned model property.
