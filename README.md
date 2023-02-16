@@ -15,10 +15,8 @@ Supposed in the below demo that the key is stored in the environment file.
 import { ChatGPTApi } from "chatgpt-api-client";
 
 async function try() {
-
     const api = new ChatGPTApi({ apiKey: process.env.OPENAI_API_KEY });
     const response = await api.sendMessage({ prompt: "Hi! How is the weather today?" });
-
     console.info(response);
 }
 ```
@@ -31,7 +29,7 @@ const api = new ChatGPTApi({ apiKey: process.env.OPENAI_API_KEY, organization: "
 You can specify which AI model will be used in the processing of your requests.
 
 ```javascript
-const response = await api.sendMessage({ prompt: "Hi! How is the weather today?", model: "model-id-0" });
+const response = await api.sendMessage({ model: "model-id-0", prompt: "Hi! How is the weather today?" });
 ```
 **text-davinci-003** is the default model that is specified in case of non-mentioned model property.<br>
 
@@ -40,7 +38,7 @@ There are a bit of parameters to pass in the sendMessage function namely the max
 ```javascript
 const response = await api.sendMessage({ 
         prompt: "Hi! How is the weather today?", //The prompt(s) to generate completions for
-        model: "model-id-0", //ID of the model to use
+        model: "text-davinci-003", //ID of the model to use
         max_tokens: 500, //The maximum number of tokens to generate in the completion
         temperature: 0, //What sampling temperature to use, between 0 and 2, Default is 1
         nCompeletions: 3 //How many completions to generate for each prompt. Default is 1
